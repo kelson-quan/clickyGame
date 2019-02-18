@@ -32,27 +32,40 @@ class App extends Component {
     this.setState({ friends });
   };
 
-  handleClick = (event) => {
-    // console.log()
+
+  handleClick = (character) => {
+    const characterID = character.id;
+    console.log(characterID);
+
+    for(var i = 0; i < this.state.clicked.length;i++) {
+      console.log("loop hit");
+      if (this.state.clicked[i] === characterID) {
+        // If there is a match in the array set the score back to 0
+        console.log("found match");
+      }
+      }
+    
     if (this.state.score < this.state.topScore) {
       this.setState({ score: this.state.score + 1 });
       this.setState.friends = this.shuffleArray(this.state.friends);
-      console.log(event);
+      this.state.clicked.push(characterID);
+      console.log(this.state.clicked);
     } else if (this.state.score >= this.state.topScore) {
       this.setState({ score: this.state.score + 1 });
       this.setState({ topScore: this.state.topScore + 1 });
       this.setState.friends = this.shuffleArray(this.state.friends);
-      console.log(event);
+      this.state.clicked.push(characterID);
+      console.log(this.state.clicked);
     }
   };
 
-  changeDate(i, newDate) {
-    let startDate = this.state.startDate.slice();
-    startDate[i] = newDate;
-    this.setState({
-        startDate
-    });
-}
+//   changeDate(i, newDate) {
+//     let startDate = this.state.startDate.slice();
+//     startDate[i] = newDate;
+//     this.setState({
+//         startDate
+//     });
+// }
 
 
   // Map over this.state.friends and render a FriendCard component for each friend object
@@ -66,7 +79,7 @@ class App extends Component {
         <Jumbotron></Jumbotron>
         <Wrapper>
           {this.state.friends.map(friend => (
-            this.state.clicked.push({});
+
             <FriendCard
               handleClick={this.handleClick}
               removeFriend={this.removeFriend}
@@ -77,7 +90,6 @@ class App extends Component {
               occupation={friend.occupation}
               location={friend.location}
               clicked={this.state.clicked}
-              changeClicked= {this.changeClicked.bind(this, i)}
               />
           ))}
         </Wrapper>

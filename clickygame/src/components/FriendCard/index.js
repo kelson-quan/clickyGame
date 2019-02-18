@@ -8,7 +8,7 @@ function FriendCard(props) {
         <img src={props.image} />
       </div>
       <div className="content">
-        <button className="btn btn-primary" value={props.clicked} onClick={(event) => props.handleClick()}>
+        <button className="btn btn-primary" value={props.clicked} id={props.id} onClick={() => props.handleClick(props)}>
           Increment
         </button>
         <ul>
